@@ -53,6 +53,9 @@ int main(void)
     int arr[n];
 
     // printf("Enter the elements: ");
+    // for (int i = 0; i < n; i++)
+    //     scanf("%d", &arr[i]);
+    
     srand(time(0));
     for (int i = 0; i < n; i++)
     {
