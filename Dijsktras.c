@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <limits.h>
+#include <stdbool.h>
 
 int main(void)
 {
@@ -25,17 +25,17 @@ int main(void)
     scanf("%d", &src);
 
     int dist[n];
-    int visited[n];
+    bool visited[n];
     for (i = 0; i < n; i++)
     {
-        dist[i] = INT_MAX;
-        visited[i] = 0;
+        dist[i] = 999;
+        visited[i] = false;
     }
     dist[src] = 0;
 
     for (int count = 0; count < n - 1; count++)
     {
-        int min = INT_MAX, min_index;
+        int min = 999, min_index;
 
         for (i = 0; i < n; i++)
         {
@@ -44,11 +44,11 @@ int main(void)
                 min = dist[i], min_index = i;
             }
         }
-        visited[min_index] = 1;
+        visited[min_index] = true;
 
         for (i = 0; i < n; i++)
         {
-            if (!visited[i] && arr[min_index][i] && dist[min_index] != INT_MAX && dist[min_index] + arr[min_index][i] < dist[i])
+            if (!visited[i] && arr[min_index][i] && dist[min_index] != 999 && dist[min_index] + arr[min_index][i] < dist[i])
             {
                 dist[i] = dist[min_index] + arr[min_index][i];
             }
