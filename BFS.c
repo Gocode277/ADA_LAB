@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdbool.h>
 
 int main(void)
@@ -8,10 +7,9 @@ int main(void)
     int n;
     scanf("%d", &n);
     int i, j;
-    int **adjMatrix = (int **)malloc(n * sizeof(int *));
+    int adjMatrix[n][n];
     for (i = 0; i < n; i++)
     {
-        adjMatrix[i] = (int *)malloc(n * sizeof(int));
         for (j = 0; j < n; j++)
         {
             adjMatrix[i][j] = 0;
