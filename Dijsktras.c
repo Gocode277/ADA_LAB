@@ -36,6 +36,7 @@ int main(void)
     for (int count = 0; count < n - 1; count++)
     {
         int min = INT_MAX, min_index;
+
         for (i = 0; i < n; i++)
         {
             if (!visited[i] && dist[i] <= min)
@@ -43,7 +44,6 @@ int main(void)
                 min = dist[i], min_index = i;
             }
         }
-
         visited[min_index] = 1;
 
         for (i = 0; i < n; i++)
