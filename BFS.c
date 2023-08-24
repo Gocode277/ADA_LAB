@@ -8,13 +8,6 @@ int main(void)
     scanf("%d", &n);
     int i, j;
     int adjMatrix[n][n];
-    for (i = 0; i < n; i++)
-    {
-        for (j = 0; j < n; j++)
-        {
-            adjMatrix[i][j] = 0;
-        }
-    }
 
     printf("Enter the adjacency matrix(use 0 for no edge 1 for edge):\n");
     for (i = 0; i < n; i++)
