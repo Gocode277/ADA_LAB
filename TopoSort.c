@@ -1,51 +1,109 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
-int main()
+typedef struct Graphs
 {
-    int n;
-    printf("Enter the no of vertices: ");
-    scanf("%d", &n);
-    int a[n][n], indeg[n], flag[n];
+    int V;
+    bool **adj;
+} Graph;
 
-    int i, j, k, count = 0;
-    printf("Enter the adjacency matrix:\n");
-    for (i = 0; i < n; i++)
+Graph *Graph_create(int V)
+{
+    Graph *g = (Graph *)malloc(sizeof(Graph));
+    g->V = V;
+
+    g->adj = (bool **)malloc(V * sizeof(bool *));
+    for (int i = 0; i < V; i++)
     {
-        for (j = 0; j < n; j++)
-            scanf("%d", &a[i][j]);
-    }
-
-    for (i = 0; i < n; i++)
-    {
-        indeg[i] = 0;
-        flag[i] = 0;
-    }
-
-    for (i = 0; i < n; i++)
-        for (j = 0; j < n; j++)
-            indeg[i] = indeg[i] + a[j][i];
-
-    printf("\nThe topological order is: ");
-
-    while (count < n)
-    {
-        for (k = 0; k < n; k++)
+        g->adj[i] = (bool *)malloc(V * sizeof(bool));
+        for (int j = 0; j < V; j++)
         {
-            if ((indeg[k] == 0) && (flag[k] == 0))
-            {
-                printf("%d ", (k + 1));
-                flag[k] = 1;
-            }
-
-            for (i = 0; i < n; i++)
-            {
-                if (a[i][k] == 1)
-                    indeg[k]--;
-            }
+            g->adj[i][j] = false;
         }
-
-        count++;
     }
 
-    return 0;
+    return g;
+}
+
+void add_edge(Graph *g, int src, int dest)
+{
+    g->adj[src][dest] = true;
+}
+
+void top_sort_func(Graph *g, int v, bool visited[], int stack[], int *top)
+{
+    int i;
+    visited[v] = true;
+
+    for (i = 0; i < g->V; i++)
+    {
+        if (g->adj[v][i] && !visited[i])
+        {
+            top_sort_func(g, i, visited, stack, top);
+        }
+    }
+
+    stack[++(*top)] = v;
+}
+
+void topo_sort(Graph *g)
+{
+    int i, t = -1;
+    int *stack = (int *)malloc(g->V * sizeof(int));
+
+    bool visited[g->V];
+
+    for (i = 0; i < g->V; i++)
+    {
+        visited[i] = false;
+    }
+
+    for (i = 0; i < g->V; i++)
+    {
+        if (visited[i] == false)
+        {
+            top_sort_func(g, i, visited, stack, &t);
+        }
+    }
+
+    while ((t) != -1)
+    {
+        printf("%d ", stack[t]);
+        (t)--;
+    }
+
+    for (int i = 0; i < g->V; i++)
+    {
+        free(g->adj[i]);
+    }
+
+    free(stack);
+    free(g->adj);
+    free(g);
+}
+
+int main(void)
+{
+    printf("Enter the number of vertices: ");
+    int v;
+    scanf("%d", &v);
+
+    Graph *g = Graph_create(v);
+
+    printf("Enter the no of edges: ");
+    int e;
+    scanf("%d", &e);
+
+    printf("Enter the starting and ending vertex:\n");
+    for (int i = 0; i < e; i++)
+    {
+        int src, dest;
+        scanf("%d %d", &src, &dest);
+        add_edge(g, src, dest);
+    }
+
+    printf("The topological sort is as: ");
+
+    topo_sort(g);
 }
