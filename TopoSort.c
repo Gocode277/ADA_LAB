@@ -43,7 +43,6 @@ void top_sort_func(Graph *g, int v, bool visited[], int stack[], int *top)
             top_sort_func(g, i, visited, stack, top);
         }
     }
-
     stack[++(*top)] = v;
 }
 
@@ -51,9 +50,7 @@ void topo_sort(Graph *g)
 {
     int i, t = -1;
     int *stack = (int *)malloc(g->V * sizeof(int));
-
     bool visited[g->V];
-
     for (i = 0; i < g->V; i++)
     {
         visited[i] = false;
@@ -61,26 +58,24 @@ void topo_sort(Graph *g)
 
     for (i = 0; i < g->V; i++)
     {
-        if (visited[i] == false)
+        if (!visited[i])
         {
             top_sort_func(g, i, visited, stack, &t);
         }
     }
 
-    while ((t) != -1)
+    while ((t) > -1)
     {
-        printf("%d ", stack[t]);
-        (t)--;
+        printf("%d ", stack[t--]);
     }
 
     for (int i = 0; i < g->V; i++)
     {
         free(g->adj[i]);
     }
-
-    free(stack);
     free(g->adj);
     free(g);
+    free(stack);
 }
 
 int main(void)
@@ -95,7 +90,7 @@ int main(void)
     int e;
     scanf("%d", &e);
 
-    printf("Enter the starting and ending vertex:\n");
+    printf("Enter the starting and ending vertex of each edge:\n");
     for (int i = 0; i < e; i++)
     {
         int src, dest;
