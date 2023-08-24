@@ -31,7 +31,7 @@ int main(void)
         }
     }
 
-    printf("Enter the adjacency matrix:\n");
+    printf("Enter the adjacency matrix(use 999 for infinity):\n");
     for (i = 0; i < n; i++)
     {
         for (j = 0; j < n; j++)
