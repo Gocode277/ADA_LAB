@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 int main(void)
 {
@@ -17,16 +18,16 @@ int main(void)
         }
     }
 
-    int visited[n];
+    bool visited[n];
     for (i = 0; i < n; i++)
     {
-        visited[i] = 0;
+        visited[i] = false;
     }
 
     printf("Enter the starting vertex: ");
     int start;
     scanf("%d", &start);
-    visited[start] = 1;
+    visited[start] = true;
 
     printf("\nThe minimal spanning tree is:\nEdge : Weight\n");
     for (k = 0; k < n - 1; k++)
@@ -53,6 +54,6 @@ int main(void)
             }
         }
         printf("%d - %d : %d\n", u, v, adj[u][v]);
-        visited[v] = 1;
+        visited[v] = true;
     }
 }
