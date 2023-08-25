@@ -4,17 +4,6 @@
 bool LR = true;
 bool RL = false;
 
-int search(int a[], int n, int mobile)
-{
-    for (int i = 0; i < n; i++)
-    {
-        if (a[i] == mobile)
-        {
-            return i;
-        }
-    }
-}
-
 int getMobile(int a[], bool dir[], int n)
 {
     int i;
@@ -22,22 +11,16 @@ int getMobile(int a[], bool dir[], int n)
 
     for (i = 0; i < n; i++)
     {
-        if (dir[a[i] - 1] == RL && i != 0)
+        if (dir[a[i] - 1] == RL && i != 0 && a[i] > a[i - 1] && a[i] > prev)
         {
-            if (a[i] > a[i - 1] && a[i] > prev)
-            {
-                mobile = a[i];
-                prev = mobile;
-            }
+            mobile = a[i];
+            prev = mobile;
         }
 
-        if (dir[a[i] - 1] == LR && i != n - 1)
+        if (dir[a[i] - 1] == LR && i != n - 1 && a[i] > a[i + 1] && a[i] > prev)
         {
-            if (a[i] > a[i + 1] && a[i] > prev)
-            {
-                mobile = a[i];
-                prev = mobile;
-            }
+            mobile = a[i];
+            prev = mobile;
         }
     }
 
@@ -48,7 +31,15 @@ int Perm(int a[], bool dir[], int n)
 {
     int temp;
     int mobile = getMobile(a, dir, n);
-    int pos = search(a, n, mobile);
+    int pos;
+    for (int i = 0; i < n; i++)
+    {
+        if (a[i] == mobile)
+        {
+            pos = i;
+            break;
+        }
+    }
 
     if (dir[a[pos] - 1] == RL)
     {
@@ -98,7 +89,6 @@ void perms(int n)
         dir[i] = RL;
 
     int fact = 1;
-
     for (int i = 1; i <= n; i++)
         fact = fact * i;
 
