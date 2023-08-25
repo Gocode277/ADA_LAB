@@ -42,14 +42,11 @@ int main(void)
             {
                 for (j = 0; j < n; j++)
                 {
-                    if (!visited[j] && adj[i][j])
+                    if (!visited[j] && adj[i][j] && min > adj[i][j])
                     {
-                        if (min > adj[i][j])
-                        {
-                            min = adj[i][j];
-                            u = i;
-                            v = j;
-                        }
+                        min = adj[i][j];
+                        u = i;
+                        v = j;
                     }
                 }
             }
