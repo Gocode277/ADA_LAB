@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
 void swap(int *a, int *b)
@@ -52,15 +53,16 @@ int main(void)
     scanf("%d", &n);
     int arr[n];
 
-    // printf("Enter the elements: ");
-    // for (int i = 0; i < n; i++)
-    //     scanf("%d", &arr[i]);
-
-    srand(time(0));
+    printf("Enter the elements: ");
     for (int i = 0; i < n; i++)
-    {
-        arr[i] = rand();
-    }
+        scanf("%d", &arr[i]);
+
+    // srand(time(0));
+    // for (int i = 0; i < n; i++)
+    // {
+    //     arr[i] = rand();
+    //     printf("%d ", arr[i]);
+    // }
 
     clock_t st, end;
     st = clock();

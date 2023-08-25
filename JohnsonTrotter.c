@@ -60,9 +60,7 @@ int Perm(int a[], bool dir[], int n)
     }
 
     for (int i = 0; i < n; i++)
-    {
         printf("%d", a[i]);
-    }
     printf(" ");
 }
 
