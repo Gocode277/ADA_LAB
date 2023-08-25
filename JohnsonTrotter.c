@@ -7,19 +7,17 @@ bool RL = false;
 int getMobile(int a[], bool dir[], int n)
 {
     int i;
-    int prev = 0, mobile = 0;
+    int mobile = 0;
 
     for (i = 0; i < n; i++)
     {
-        if (dir[a[i] - 1] == RL && i != 0 && a[i] > a[i - 1] && a[i] > prev)
+        if (dir[a[i] - 1] == RL && i != 0 && a[i] > a[i - 1] && a[i] > mobile)
         {
             mobile = a[i];
-            prev = mobile;
         }
-        else if (dir[a[i] - 1] == LR && i != n - 1 && a[i] > a[i + 1] && a[i] > prev)
+        else if (dir[a[i] - 1] == LR && i != n - 1 && a[i] > a[i + 1] && a[i] > mobile)
         {
             mobile = a[i];
-            prev = mobile;
         }
     }
 
