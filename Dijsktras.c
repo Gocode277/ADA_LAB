@@ -7,13 +7,12 @@ int main(void)
     printf("Enter the number of vertices: ");
     int n;
     scanf("%d", &n);
-    int **arr = (int **)malloc(n * sizeof(int *));
+    int arr[n][n];
 
     int i, j;
     printf("Enter cost matrix(use 999 for infinity):\n");
     for (i = 0; i < n; i++)
     {
-        arr[i] = (int *)malloc(n * sizeof(int));
         for (j = 0; j < n; j++)
         {
             scanf("%d", &arr[i][j]);
@@ -48,7 +47,7 @@ int main(void)
 
         for (i = 0; i < n; i++)
         {
-            if (!visited[i] && arr[min_index][i] && dist[min_index] != 999 && dist[min_index] + arr[min_index][i] < dist[i])
+            if (!visited[i] && dist[min_index] + arr[min_index][i] < dist[i])
             {
                 dist[i] = dist[min_index] + arr[min_index][i];
             }
@@ -60,10 +59,4 @@ int main(void)
     {
         printf("%d -> %d: %d\n", src, i, dist[i]);
     }
-
-    for (i = 0; i < n; i++)
-    {
-        free(arr[i]);
-    }
-    free(arr);
 }
