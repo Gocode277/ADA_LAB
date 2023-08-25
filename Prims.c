@@ -30,6 +30,7 @@ int main(void)
     visited[start] = true;
 
     printf("\nThe minimal spanning tree is:\nEdge : Weight\n");
+    int cost = 0;
     for (k = 0; k < n - 1; k++)
     {
         int min = 999;
@@ -54,6 +55,8 @@ int main(void)
             }
         }
         printf("%d - %d : %d\n", u, v, adj[u][v]);
+        cost += adj[u][v];
         visited[v] = true;
     }
+    printf("The cost of the minimal spanning tree is: %d\n", cost);
 }
