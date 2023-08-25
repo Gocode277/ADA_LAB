@@ -10,7 +10,7 @@ int search(int a[], int n, int mobile)
     {
         if (a[i] == mobile)
         {
-            return i + 1;
+            return i;
         }
     }
 }
@@ -41,10 +41,7 @@ int getMobile(int a[], bool dir[], int n)
         }
     }
 
-    if (mobile == 0 && prev == 0)
-        return 0;
-    else
-        return mobile;
+    return mobile;
 }
 
 int Perm(int a[], bool dir[], int n)
@@ -53,27 +50,28 @@ int Perm(int a[], bool dir[], int n)
     int mobile = getMobile(a, dir, n);
     int pos = search(a, n, mobile);
 
-    if (dir[a[pos - 1] - 1] == RL)
-    {
-        temp = a[pos - 1];
-        a[pos - 1] = a[pos - 2];
-        a[pos - 2] = temp;
-    }
-    else if (dir[a[pos - 1] - 1] == LR)
+    if (dir[a[pos] - 1] == RL)
     {
         temp = a[pos];
         a[pos] = a[pos - 1];
         a[pos - 1] = temp;
     }
+    else if (dir[a[pos] - 1] == LR)
+    {
+        temp = a[pos + 1];
+        a[pos + 1] = a[pos];
+        a[pos] = temp;
+    }
 
     for (int i = 0; i < n; i++)
     {
-        if (a[i] > mobile)
+        if (a[i] > mobile && dir[a[i] - 1] == LR)
         {
-            if (dir[a[i] - 1] == LR)
-                dir[a[i] - 1] = RL;
-            else if (dir[a[i] - 1] == RL)
-                dir[a[i] - 1] = LR;
+            dir[a[i] - 1] = RL;
+        }
+        else if (a[i] > mobile && dir[a[i] - 1] == RL)
+        {
+            dir[a[i] - 1] = LR;
         }
     }
 
