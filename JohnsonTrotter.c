@@ -16,8 +16,7 @@ int getMobile(int a[], bool dir[], int n)
             mobile = a[i];
             prev = mobile;
         }
-
-        if (dir[a[i] - 1] == LR && i != n - 1 && a[i] > a[i + 1] && a[i] > prev)
+        else if (dir[a[i] - 1] == LR && i != n - 1 && a[i] > a[i + 1] && a[i] > prev)
         {
             mobile = a[i];
             prev = mobile;
@@ -56,13 +55,9 @@ int Perm(int a[], bool dir[], int n)
 
     for (int i = 0; i < n; i++)
     {
-        if (a[i] > mobile && dir[a[i] - 1] == LR)
+        if (a[i] > mobile)
         {
-            dir[a[i] - 1] = RL;
-        }
-        else if (a[i] > mobile && dir[a[i] - 1] == RL)
-        {
-            dir[a[i] - 1] = LR;
+            dir[a[i] - 1] = !dir[a[i] - 1];
         }
     }
 

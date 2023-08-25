@@ -40,9 +40,9 @@ int main(void)
         parent[i] = i;
     }
 
-    int count = 0, k = 0, min, sum = 0, j, t[n][n], u, v;
+    int k = 0, min, sum = 0, j, t[n][2], u, v;
 
-    while (count != n - 1)
+    while (k != n - 1)
     {
         min = 999;
         for (i = 0; i < n; i++)
@@ -67,13 +67,12 @@ int main(void)
             t[k][0] = u;
             t[k][1] = v;
             k++;
-            count++;
-            sum = sum + adj[u][v];
+            sum += adj[u][v];
         }
         adj[u][v] = adj[v][u] = 999;
     }
 
-    if (count == n - 1)
+    if (k == n - 1)
     {
         printf("The minimal spanning tree is as:\n");
         for (i = 0; i < n - 1; i++)
