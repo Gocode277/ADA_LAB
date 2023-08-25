@@ -82,17 +82,6 @@ int Perm(int a[], bool dir[], int n)
     printf(" ");
 }
 
-int fact(int n)
-{
-    int fact = 1;
-
-    for (int i = 1; i <= n; i++)
-    {
-        fact = fact * i;
-    }
-    return fact;
-}
-
 void perms(int n)
 {
     int a[n];
@@ -108,14 +97,19 @@ void perms(int n)
     for (int i = 0; i < n; i++)
         dir[i] = RL;
 
-    for (int i = 1; i < fact(n); i++)
+    int fact = 1;
+
+    for (int i = 1; i <= n; i++)
+        fact = fact * i;
+
+    for (int i = 1; i < fact; i++)
         Perm(a, dir, n);
 }
 
 int main(void)
 {
     int n;
-    printf("Enter the value of n: ");
+    printf("Enter positive value of n: ");
     scanf("%d", &n);
     perms(n);
 }
