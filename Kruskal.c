@@ -57,6 +57,12 @@ int main(void)
                 }
             }
         }
+        
+        if (min == 999)
+        {
+            printf("\nSpanning tree does not exist!");
+            return 0;
+        }
 
         i = find(u, parent);
         j = find(v, parent);
@@ -72,17 +78,10 @@ int main(void)
         adj[u][v] = adj[v][u] = 999;
     }
 
-    if (k == n - 1)
+    printf("The minimal spanning tree is as:\n");
+    for (i = 0; i < n - 1; i++)
     {
-        printf("The minimal spanning tree is as:\n");
-        for (i = 0; i < n - 1; i++)
-        {
-            printf("%d -> %d\n", t[i][0], t[i][1]);
-        }
-        printf("Cost of spanning tree = %d\n", sum);
+        printf("%d -> %d\n", t[i][0], t[i][1]);
     }
-    else
-    {
-        printf("\nSpanning tree does not exist!");
-    }
+    printf("Cost of spanning tree = %d\n", sum);
 }
