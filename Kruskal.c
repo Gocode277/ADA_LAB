@@ -42,7 +42,7 @@ int main(void)
 
     int k = 0, min, sum = 0, j, t[n][2], u, v, cost[n];
 
-    while (k != n - 1)
+    while (k < n - 1)
     {
         min = 999;
         for (i = 0; i < n; i++)
@@ -72,10 +72,11 @@ int main(void)
             union1(i, j, parent);
             t[k][0] = u;
             t[k][1] = v;
-            k++;
             cost[k] = adj[u][v];
+            k++;
             sum += adj[u][v];
         }
+
         adj[u][v] = adj[v][u] = 999;
     }
 
