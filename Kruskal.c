@@ -40,7 +40,7 @@ int main(void)
         parent[i] = i;
     }
 
-    int k = 0, min, sum = 0, j, t[n][2], u, v;
+    int k = 0, min, sum = 0, j, t[n][2], u, v, cost[n];
 
     while (k != n - 1)
     {
@@ -57,7 +57,7 @@ int main(void)
                 }
             }
         }
-        
+
         if (min == 999)
         {
             printf("\nSpanning tree does not exist!");
@@ -73,6 +73,7 @@ int main(void)
             t[k][0] = u;
             t[k][1] = v;
             k++;
+            cost[k] = adj[u][v];
             sum += adj[u][v];
         }
         adj[u][v] = adj[v][u] = 999;
@@ -81,7 +82,7 @@ int main(void)
     printf("The minimal spanning tree is as:\n");
     for (i = 0; i < n - 1; i++)
     {
-        printf("%d -> %d\n", t[i][0], t[i][1]);
+        printf("%d -> %d: %d\n", t[i][0], t[i][1], cost[i]);
     }
     printf("Cost of spanning tree = %d\n", sum);
 }
